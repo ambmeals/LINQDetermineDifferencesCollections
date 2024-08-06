@@ -363,7 +363,11 @@
       List<SalesOrder> sales = SalesOrderRepository.GetAll();
 
       // Write Method Syntax Here
-
+      list = products
+          .ExceptBy<Product, int>(sales
+                  .Select(sale => sale.ProductID),
+              prod => prod.ProductID)
+          .ToList();
 
       return list;
     }
@@ -382,7 +386,9 @@
       List<int> list2 = new() { 3, 4, 5 };
 
       // Write Query Syntax Here
-      
+      list = (from num in list1 select num)
+          .Intersect(list2)
+          .ToList();
 
       return list;
     }
@@ -401,7 +407,7 @@
       List<int> list2 = new() { 3, 4, 5 };
 
       // Write Method Syntax Here
-      
+      list = list1.Intersect(list2).ToList();
 
       return list;
     }
@@ -418,7 +424,9 @@
       List<SalesOrder> sales = SalesOrderRepository.GetAll();
 
       // Write Query Syntax Here
-      
+      list = (from prod in products select prod.ProductID)
+          .Intersect(from sale in sales select sale.ProductID)
+          .ToList();
 
       return list;
     }
@@ -435,7 +443,10 @@
       List<SalesOrder> sales = SalesOrderRepository.GetAll();
 
       // Write Method Syntax Here
-
+      list = products
+          .Select(prod => prod.ProductID)
+          .Intersect(sales.Select(sale => sale.ProductID))
+          .ToList();
 
       return list;
     }
