@@ -561,8 +561,8 @@
 
       // Write Query Syntax Here
       list = (from prod in products select prod)
-          .IntersectBy(from sale in sales select sale.ProductID, p => p.ProductID)
-          .ToList();
+          .IntersectBy<Product, int>(from sale in sales select sale.ProductID, 
+          prod => prod.ProductID).ToList();
 
       return list;
     }
