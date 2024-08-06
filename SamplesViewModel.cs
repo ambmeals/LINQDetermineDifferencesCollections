@@ -471,7 +471,9 @@
       list2.RemoveAll(prod => prod.Color == "Red");
 
       // Write Query Syntax Here
-     
+     list = (from prod in list1 select prod)
+          .Intersect(list2, pc)
+          .ToList();
 
       return list;
     }
@@ -496,7 +498,9 @@
       list2.RemoveAll(prod => prod.Color == "Red");
 
       // Write Method Syntax Here
-      
+      list = list1
+          .Intersect(list2, pc)
+          .ToList();
 
       return list;
     }
