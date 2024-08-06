@@ -581,7 +581,8 @@
 
       // Write Method Syntax Here
       list = products
-          .IntersectBy(sales.Select(sale => sale.ProductID), p => p.ProductID)
+          .IntersectBy<Product, int>(sales.Select(sale => sale.ProductID),
+              prod => prod.ProductID)
           .ToList();
 
       return list;
